@@ -1,0 +1,1293 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "sid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "account_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "name": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "cnam": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "search": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "referrer": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "visitor_sid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "source_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "source_sid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tgid": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "likelihood": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "duration": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "direction": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "talk_time": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ring_time": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "hold_time": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "wait_time": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "parent_id": {
+      "type": [
+        "null",
+        "null"
+      ]
+    },
+    "email": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "street": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "city": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "state": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "country": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "postal_code": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "called_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "unix_time": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "tracking_number_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "tracking_number_sid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tracking_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tracking_label": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "dial_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_new_caller": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "indexed_at": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "agent_insights": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "duration_period": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "gte": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "lte": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
+      }
+    },
+    "inbound_rate_center": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "country": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "prefix": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "tollfree": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        }
+      }
+    },
+    "source_tag": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "excluded": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "redacted": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "tracking_number_format": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "alternative_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "tracking_number_bare": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "caller_number_format": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "caller_number_complete": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "caller_number_bare": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "caller_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "caller_number_split": {
+      "anyOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      ]
+    },
+    "contact_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "visitor": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "call_path": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "route_name": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "route_id": {
+            "type": [
+              "integer",
+              "string",
+              "null"
+            ]
+          },
+          "route_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "started_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "left_talk_time": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "right_talk_time": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "transfers": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "to": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "offset": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "start_time": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "transferred_at_relative": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "call_status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "spotted": {
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "salesforce": {
+      "type": [
+        "object",
+        "null"
+      ]
+    },
+    "callbacks": {
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "emails": {
+      "type": [
+        "array",
+        "null"
+      ]
+    },
+    "day": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "month": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "hour": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "paid": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "source": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "medium": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "keyword": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "campaign": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ad_group": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ad_match_type": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ad_content": {
+          "type": [
+            "null",
+            "null"
+          ]
+        },
+        "ad_slot_position": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ad_network": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ad_format": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "ad_placement": {
+          "type": [
+            "null",
+            "null"
+          ]
+        },
+        "ad_group_id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "campaign_id": {
+          "type": [
+            "null",
+            "string"
+          ]
+        }
+      }
+    },
+    "ga": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "cid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "ga4": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "array",
+              "null"
+            ],
+            "items": {
+              "type": [
+                "string",
+                "null"
+              ]
+            }
+          }
+        },
+        "events": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "utmz": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "utma": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "utmb": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "utmc": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "medium": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "campaign": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "gclid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gclsrc": {
+          "type": [
+            "null",
+            "null"
+          ]
+        },
+        "gwbraid": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "gwbraid_type": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "tag_list": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "string",
+          "null"
+        ]
+      }
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latitude": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "longitude": {
+      "type": [
+        "null",
+        "number"
+      ]
+    },
+    "extended_lookup_on": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "agent_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agent": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "legs": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "started_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "end_at": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "sid": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "to": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "from": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "status": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "billed_amount": {
+      "type": [
+        "number",
+        "null"
+      ]
+    },
+    "billed_at": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "audio": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "is_s3_link": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "touchpoints": {
+      "type": [
+        "array",
+        "null"
+      ],
+      "items": {
+        "type": [
+          "object",
+          "null"
+        ],
+        "properties": {
+          "call_id": {
+            "type": [
+              "integer",
+              "null"
+            ]
+          },
+          "time": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "touch_type": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "clickid": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "type": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "source": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "medium": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "position": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "weight": {
+            "type": [
+              "number",
+              "null"
+            ]
+          },
+          "visitor_sid": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        }
+      }
+    },
+    "last_touch": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geo": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "lon": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "lat": {
+          "type": [
+            "number",
+            "null"
+          ]
+        }
+      }
+    },
+    "business_number": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "business_label": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receiving_number_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "receiving_number_sid": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "business_number_format": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "inputs": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "menu_inputs": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "string",
+              "null"
+            ]
+          }
+        },
+        "geo_inputs": {
+          "type": [
+            "array",
+            "null"
+          ]
+        }
+      }
+    },
+    "first_touch": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "last_location": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "webvisit": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "score": {
+          "type": [
+            "number",
+            "null"
+          ]
+        },
+        "keywords": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "referrer_host": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "referrer_path": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "location_host": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "location_path": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "browser": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "device": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mobile": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "web_source": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "medium": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "visitor_ip": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "campaign": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "keyword": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ad_match_type": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ad_content": {
+      "type": [
+        "null",
+        "null"
+      ]
+    },
+    "ad_slot": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ad_slot_position": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ad_network": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "creative_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ad_group_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "adgroup_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "campaign_id": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ad_format": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "ad_targeting_type": {
+      "type": [
+        "null",
+        "null"
+      ]
+    },
+    "keyword_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "ubv": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ubp": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "ubvt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transcription": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "transcription_text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "summary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "form": {
+      "type": [
+        "object",
+        "null"
+      ],
+      "properties": {
+        "number_to_call": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "customer_number_to_dial": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "email": {
+          "type": [
+            "null",
+            "string"
+          ]
+        },
+        "trackback_id": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "form_id": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        },
+        "form_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "custom": {
+          "type": [
+            "array",
+            "null"
+          ],
+          "items": {
+            "type": [
+              "object",
+              "null"
+            ],
+            "properties": {
+              "value": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              },
+              "id": {
+                "type": [
+                  "string",
+                  "null"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

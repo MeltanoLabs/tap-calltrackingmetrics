@@ -1,0 +1,128 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "user_role": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "status": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "created": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "updated": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "canceled": {
+      "type": [
+        "null",
+        "string"
+      ]
+    },
+    "voice_menus_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "numbers_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "user_licenses_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "receiving_numbers_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sources_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "users_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "webhooks_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "calls_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "queues_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "schedules_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geo_routes_url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "url": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "agency_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    }
+  }
+}
