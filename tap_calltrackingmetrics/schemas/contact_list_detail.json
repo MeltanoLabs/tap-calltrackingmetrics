@@ -1,0 +1,101 @@
+{
+    "type": [
+        "object",
+        "null"
+    ],
+    "properties": {
+        "id": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "contact_id": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "name": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "number": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "caller_number_format": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "caller_number_split": {
+            "type": [
+                "array",
+                "null"
+            ],
+            "items": {
+                "type": [
+                    "string",
+                    "null"
+                ]
+            }
+        },
+        "favorite": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "address": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "street": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "city": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "state": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "country": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "postal_code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            }
+        },
+        "custom_fields": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "additionalProperties": true
+        }
+    }
+}

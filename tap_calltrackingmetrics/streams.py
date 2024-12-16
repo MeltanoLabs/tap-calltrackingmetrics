@@ -94,3 +94,52 @@ class SaleStream(CallTrackingMetricsStream):
     replication_key = None
     schema_filepath = SCHEMAS_DIR / "sale.json"
     parent_stream_type = CallStream
+
+
+class TriggerStream(PaginatedCallTrackingMetricsStream):
+
+    name = "trigger"
+    path = "/api/v1/accounts/{_sdc_account_id}/triggers"
+    records_jsonpath = "$.automators[*]"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key = None
+    schema_filepath = SCHEMAS_DIR / "trigger.json"
+    parent_stream_type = AccountStream
+
+
+class ContactListStream(PaginatedCallTrackingMetricsStream):
+
+    # Maximum page size is 10, using higher numbers causes results to be truncated
+    PAGE_SIZE=10
+
+    name = "contact_list"
+    path = "/api/v1/accounts/{_sdc_account_id}/lists"
+    records_jsonpath = "$.contact_lists[*]"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key = None
+    schema_filepath = SCHEMAS_DIR / "contact_list.json"
+    parent_stream_type = AccountStream
+
+    def get_child_context(
+        self,
+        record: types.Record,
+        context: types.Context | None,
+    ) -> types.Context | None:
+        return {
+            "_sdc_account_id": context["_sdc_account_id"],
+            "_sdc_contact_list_id": record["id"],
+        }
+
+
+class ContactListDetailStream(PaginatedCallTrackingMetricsStream):
+
+    # Maximum page size is 10, using higher numbers causes results to be truncated
+    PAGE_SIZE=10
+
+    name = "contact_list_detail"
+    path = "/api/v1/accounts/{_sdc_account_id}/lists/{_sdc_contact_list_id}/contacts"
+    records_jsonpath = "$.contacts[*]"
+    primary_keys: t.ClassVar[list[str]] = ["id"]
+    replication_key = None
+    schema_filepath = SCHEMAS_DIR / "contact_list_detail.json"
+    parent_stream_type = ContactListStream

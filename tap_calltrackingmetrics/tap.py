@@ -49,6 +49,9 @@ class TapCallTrackingMetrics(Tap):
             streams.UserStream(self),
             streams.CallStream(self),
             streams.SaleStream(self),
+            streams.ContactListStream(self),
+            streams.ContactListDetailStream(self),
+            streams.TriggerStream(self),
         ]
 
 
