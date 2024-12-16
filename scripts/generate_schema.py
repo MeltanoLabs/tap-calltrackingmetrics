@@ -7,6 +7,9 @@ from dotenv import load_dotenv
 from genson import SchemaBuilder
 from singer_sdk import RESTStream
 
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from tap_calltrackingmetrics import streams
 from tap_calltrackingmetrics.tap import TapCallTrackingMetrics
 
