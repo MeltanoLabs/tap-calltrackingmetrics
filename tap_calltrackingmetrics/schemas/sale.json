@@ -1,0 +1,68 @@
+{
+  "type": [
+    "object",
+    "null"
+  ],
+  "properties": {
+    "service_rep_name": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "call_id": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "score": {
+      "type": [
+        "integer",
+        "null"
+      ]
+    },
+    "none": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "conversion": {
+      "type": [
+        "boolean",
+        "null"
+      ]
+    },
+    "notes": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "value": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "sale_date": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "_sdc_account_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "_sdc_call_id": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  }
+}

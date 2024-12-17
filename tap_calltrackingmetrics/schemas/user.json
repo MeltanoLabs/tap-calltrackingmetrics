@@ -1,0 +1,148 @@
+{
+    "type": [
+        "object",
+        "null"
+    ],
+    "properties": {
+        "id": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "uid": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "first_name": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "last_name": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "account_id": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        },
+        "inbound_number": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "status": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "email": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "pic_url": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "role": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "url": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "live_calls": {
+            "type": [
+                "array",
+                "null"
+            ]
+        },
+        "language": {
+            "type": [
+                "string",
+                "null"
+            ]
+        },
+        "phone_setting_id": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "default_country": {
+            "type": [
+                "null",
+                "string"
+            ]
+        },
+        "desk_mode_default": {
+            "type": [
+                "boolean",
+                "null"
+            ]
+        },
+        "outbound_number": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "id": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "country_code": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "base_number": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "description": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "is_default": {
+                    "type": [
+                        "boolean",
+                        "null"
+                    ]
+                }
+            }
+        },
+        "_sdc_account_id": {
+            "type": [
+                "integer",
+                "null"
+            ]
+        }
+    }
+}
