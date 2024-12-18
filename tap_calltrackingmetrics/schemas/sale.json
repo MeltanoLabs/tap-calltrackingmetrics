@@ -54,13 +54,13 @@
     },
     "_sdc_account_id": {
       "type": [
-        "string",
+        "integer",
         "null"
       ]
     },
     "_sdc_call_id": {
       "type": [
-        "string",
+        "integer",
         "null"
       ]
     }
