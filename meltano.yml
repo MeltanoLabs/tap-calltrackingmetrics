@@ -20,7 +20,7 @@ plugins:
     - name: secret_key
       sensitive: true
     - name: start_date
-      kind: integer
+      kind: date_iso8601
   loaders:
   - name: target-jsonl
     variant: andyh1203

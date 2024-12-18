@@ -1286,6 +1286,13 @@
           }
         }
       }
+    },
+    "_sdc_timestamp": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "format": "date-time"
     }
   }
 }

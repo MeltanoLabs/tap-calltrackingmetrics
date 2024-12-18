@@ -54,7 +54,7 @@ class CallStream(PaginatedCallTrackingMetricsStream):
     path = "/api/v1/accounts/{_sdc_account_id}/calls"
     records_jsonpath = "$.calls[*]"
     primary_keys: t.ClassVar[list[str]] = ["id"]
-    replication_key = "unix_time"
+    replication_key = "_sdc_timestamp"
     schema_filepath = SCHEMAS_DIR / "call.json"
     parent_stream_type = AccountStream
 
@@ -64,15 +64,17 @@ class CallStream(PaginatedCallTrackingMetricsStream):
         next_page_token: t.Any | None,
     ) -> dict[str, t.Any]:
         params = super().get_url_params(context, next_page_token)
-        starting_replication_key_value = self.get_starting_replication_key_value(
-            context
-        ) or self.config.get("start_date")
-        if "start_date" not in params and starting_replication_key_value is not None:
-            start_date = datetime.datetime.fromtimestamp(
-                starting_replication_key_value, tz=datetime.timezone.utc
-            ).strftime("%Y-%m-%d")
-            params["start_date"] = start_date
+        starting_timestamp = self.get_starting_timestamp(context)
+        if starting_timestamp is not None:
+            params["start_date"] = starting_timestamp.strftime("%Y-%m-%d")
         return params
+
+    def post_process(self, row: types.Record, context: types.Context | None) -> types.Record:
+        row = super().post_process(row, context)
+        row["_sdc_timestamp"] = datetime.datetime.fromtimestamp(
+            row["unix_time"], tz=datetime.timezone.utc
+        ).isoformat()
+        return row
 
     def get_child_context(
         self,
