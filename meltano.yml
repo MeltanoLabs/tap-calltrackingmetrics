@@ -21,9 +21,6 @@ plugins:
       sensitive: true
     - name: start_date
       kind: date_iso8601
-    select:
-    - 'call.*'
-    - 'account.*'
   loaders:
   - name: target-jsonl
     variant: andyh1203
