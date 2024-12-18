@@ -127,7 +127,7 @@
     },
     "parent_id": {
       "type": [
-        "null",
+        "string",
         "null"
       ]
     },
@@ -334,17 +334,10 @@
       ]
     },
     "caller_number_split": {
-      "anyOf": [
-        {
-          "type": "null"
-        },
-        {
-          "type": "array",
+          "type": ["array", "null"],
           "items": {
-            "type": "string"
+            "type": ["string", "null"]
           }
-        }
-      ]
     },
     "contact_number": {
       "type": [
@@ -557,7 +550,7 @@
         },
         "ad_content": {
           "type": [
-            "null",
+            "string",
             "null"
           ]
         },
@@ -581,7 +574,7 @@
         },
         "ad_placement": {
           "type": [
-            "null",
+            "string",
             "null"
           ]
         },
@@ -685,7 +678,7 @@
         },
         "gclsrc": {
           "type": [
-            "null",
+            "string",
             "null"
           ]
         },
@@ -1113,7 +1106,7 @@
     },
     "ad_content": {
       "type": [
-        "null",
+        "string",
         "null"
       ]
     },
@@ -1167,7 +1160,7 @@
     },
     "ad_targeting_type": {
       "type": [
-        "null",
+        "string",
         "null"
       ]
     },
@@ -1275,6 +1268,11 @@
               "value": {
                 "type": [
                   "string",
+                  "array",
+                  "object",
+                  "integer",
+                  "number",
+                  "boolean",
                   "null"
                 ]
               },
