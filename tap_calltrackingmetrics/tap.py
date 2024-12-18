@@ -31,10 +31,10 @@ class TapCallTrackingMetrics(Tap):
         ),
         th.Property(
             "start_date",
-            th.IntegerType,
+            th.DateTimeType,
             required=False,
             title="Start Date",
-            description="Formatted as a Unix timestamp.",
+            description="The earliest record to sync.",
         ),
     ).to_dict()
 

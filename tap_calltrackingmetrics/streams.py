@@ -64,13 +64,18 @@ class CallStream(PaginatedCallTrackingMetricsStream):
         next_page_token: t.Any | None,
     ) -> dict[str, t.Any]:
         params = super().get_url_params(context, next_page_token)
-        starting_replication_key_value = self.get_starting_replication_key_value(
-            context
-        ) or self.config.get("start_date")
-        if "start_date" not in params and starting_replication_key_value is not None:
-            start_date = datetime.datetime.fromtimestamp(
-                starting_replication_key_value, tz=datetime.timezone.utc
+        starting_replication_key_value = self.get_starting_replication_key_value(context)  # noqa: E501
+        start_date = None
+        if isinstance(starting_replication_key_value, str):
+            start_date = datetime.datetime.fromisoformat(
+                starting_replication_key_value
             ).strftime("%Y-%m-%d")
+        elif isinstance(starting_replication_key_value, int):
+            start_date = datetime.datetime.fromtimestamp(
+                starting_replication_key_value,
+                tz=datetime.timezone.utc,
+            ).strftime("%Y-%m-%d")
+        if start_date is not None:
             params["start_date"] = start_date
         return params
 
