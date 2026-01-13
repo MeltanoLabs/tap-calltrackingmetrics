@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import typing as t
-from importlib import resources
 from urllib.parse import parse_qs, urlparse
 
 from requests.auth import HTTPBasicAuth
@@ -16,11 +15,7 @@ if t.TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 
-SCHEMAS_DIR = resources.files(__package__) / "schemas"
-
-
 class CallTrackingMetricsPaginator(JSONPathPaginator):
-
     def get_next(self, response: requests.Response) -> str | None:
         all_matches = extract_jsonpath(self._jsonpath, response.json())
         return next(all_matches, None)
@@ -44,7 +39,6 @@ class CallTrackingMetricsStream(RESTStream):
 
 
 class PaginatedCallTrackingMetricsStream(CallTrackingMetricsStream):
-
     # Going above a page size of 150 causes http 400 with response body:
     # {
     #     "error": "per_page limit is 150"

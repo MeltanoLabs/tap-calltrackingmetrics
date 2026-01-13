@@ -1,5 +1,6 @@
-import json
+import json  # noqa: INP001
 import os
+import sys
 import typing
 from decimal import Decimal
 
@@ -7,8 +8,7 @@ from dotenv import load_dotenv
 from genson import SchemaBuilder
 from singer_sdk import RESTStream
 
-import sys
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # noqa: PTH100, PTH120
 
 from tap_calltrackingmetrics import streams
 from tap_calltrackingmetrics.tap import TapCallTrackingMetrics
@@ -26,8 +26,7 @@ def make_nullable(schema: dict) -> dict:
                 schema["type"].append("null")
 
         # Remove 'required' key if it exists
-        if "required" in schema:
-            del schema["required"]
+        schema.pop("required", None)
 
         for value in schema.values():
             make_nullable(value)
