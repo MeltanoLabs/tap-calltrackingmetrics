@@ -10,16 +10,16 @@ from tap_calltrackingmetrics.client import (
     CallTrackingMetricsStream,
     PaginatedCallTrackingMetricsStream,
 )
+from tap_calltrackingmetrics import schemas
 
 if t.TYPE_CHECKING:
     from singer_sdk.helpers import types
 
 
-SCHEMAS_DIR = resources.files(__package__) / "schemas"
+SCHEMAS_DIR = resources.files(schemas)
 
 
 class AccountStream(PaginatedCallTrackingMetricsStream):
-
     name = "account"
     path = "/api/v1/accounts"
     records_jsonpath = "$.accounts[*]"
@@ -38,7 +38,6 @@ class AccountStream(PaginatedCallTrackingMetricsStream):
 
 
 class UserStream(PaginatedCallTrackingMetricsStream):
-
     name = "user"
     path = "/api/v1/accounts/{_sdc_account_id}/users"
     records_jsonpath = "$.users[*]"
@@ -49,7 +48,6 @@ class UserStream(PaginatedCallTrackingMetricsStream):
 
 
 class CallStream(PaginatedCallTrackingMetricsStream):
-
     name = "call"
     path = "/api/v1/accounts/{_sdc_account_id}/calls"
     records_jsonpath = "$.calls[*]"
@@ -64,7 +62,9 @@ class CallStream(PaginatedCallTrackingMetricsStream):
         next_page_token: t.Any | None,
     ) -> dict[str, t.Any]:
         params = super().get_url_params(context, next_page_token)
-        starting_replication_key_value = self.get_starting_replication_key_value(context)  # noqa: E501
+        starting_replication_key_value = self.get_starting_replication_key_value(
+            context
+        )
         start_date = None
         if isinstance(starting_replication_key_value, str):
             start_date = datetime.datetime.fromisoformat(
@@ -84,6 +84,7 @@ class CallStream(PaginatedCallTrackingMetricsStream):
         record: types.Record,
         context: types.Context | None,
     ) -> types.Context | None:
+        assert context, "Context is expected here"  # noqa: S101
         return {
             "_sdc_account_id": context["_sdc_account_id"],
             "_sdc_call_id": record["id"],
@@ -91,7 +92,6 @@ class CallStream(PaginatedCallTrackingMetricsStream):
 
 
 class SaleStream(CallTrackingMetricsStream):
-
     name = "sale"
     path = "/api/v1/accounts/{_sdc_account_id}/calls/{_sdc_call_id}/sale"
     records_jsonpath = "$"
@@ -102,7 +102,6 @@ class SaleStream(CallTrackingMetricsStream):
 
 
 class TriggerStream(PaginatedCallTrackingMetricsStream):
-
     name = "trigger"
     path = "/api/v1/accounts/{_sdc_account_id}/triggers"
     records_jsonpath = "$.automators[*]"
@@ -113,9 +112,8 @@ class TriggerStream(PaginatedCallTrackingMetricsStream):
 
 
 class ContactListStream(PaginatedCallTrackingMetricsStream):
-
     # Maximum page size is 10, using higher numbers causes results to be truncated
-    PAGE_SIZE=10
+    PAGE_SIZE = 10
 
     name = "contact_list"
     path = "/api/v1/accounts/{_sdc_account_id}/lists"
@@ -130,6 +128,7 @@ class ContactListStream(PaginatedCallTrackingMetricsStream):
         record: types.Record,
         context: types.Context | None,
     ) -> types.Context | None:
+        assert context, "Context is expected here"  # noqa: S101
         return {
             "_sdc_account_id": context["_sdc_account_id"],
             "_sdc_contact_list_id": record["id"],
@@ -137,9 +136,8 @@ class ContactListStream(PaginatedCallTrackingMetricsStream):
 
 
 class ContactListDetailStream(PaginatedCallTrackingMetricsStream):
-
     # Maximum page size is 10, using higher numbers causes results to be truncated
-    PAGE_SIZE=10
+    PAGE_SIZE = 10
 
     name = "contact_list_detail"
     path = "/api/v1/accounts/{_sdc_account_id}/lists/{_sdc_contact_list_id}/contacts"
