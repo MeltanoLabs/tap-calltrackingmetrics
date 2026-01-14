@@ -1555,7 +1555,6 @@ wheels = [
 
 [[package]]
 name = "tap-calltrackingmetrics"
-version = "0.0.1"
 source = { editable = "." }
 dependencies = [
     { name = "requests" },

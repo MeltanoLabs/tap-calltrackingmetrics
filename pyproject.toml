@@ -1,6 +1,6 @@
 [project]
 name = "tap-calltrackingmetrics"
-version = "0.0.1"
+dynamic = ["version"]
 description = "Singer tap for CallTrackingMetrics, built with the Meltano Singer SDK."
 authors = [{ name = "FirstName LastName", email = "firstname.lastname@example.com" }]
 requires-python = ">=3.10"
@@ -47,8 +47,12 @@ typing = [
 ]
 
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
+
+[tool.hatch.version]
+fallback-version = "0.0.0.dev0"
+source = "vcs"
 
 [tool.pytest]
 addopts = [
