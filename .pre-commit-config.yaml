@@ -1,5 +1,6 @@
 ci:
   autofix_prs: true
+  autofix_commit_msg: 'style: pre-commit autofix'
   autoupdate_schedule: weekly
   autoupdate_commit_msg: 'chore: pre-commit autoupdate'
 
@@ -22,10 +23,17 @@ repos:
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
+  - id: check-meltano
 
 - repo: https://github.com/astral-sh/ruff-pre-commit
   rev: v0.14.11
   hooks:
-  - id: ruff
+  - id: ruff-check
     args: [--fix, --exit-non-zero-on-fix, --show-fixes]
   - id: ruff-format
+
+- repo: https://github.com/astral-sh/uv-pre-commit
+  rev: 0.9.25
+  hooks:
+  - id: uv-lock
+  - id: uv-sync

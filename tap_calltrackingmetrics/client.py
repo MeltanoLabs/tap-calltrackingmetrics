@@ -2,40 +2,31 @@
 
 from __future__ import annotations
 
-import typing as t
+import sys
+from typing import TYPE_CHECKING, Any
 from urllib.parse import parse_qs, urlparse
 
 from requests.auth import HTTPBasicAuth
-from singer_sdk.helpers.jsonpath import extract_jsonpath
-from singer_sdk.pagination import JSONPathPaginator
 from singer_sdk.streams import RESTStream
 
-if t.TYPE_CHECKING:
-    import requests
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if TYPE_CHECKING:
     from singer_sdk.helpers.types import Context
 
 
-class CallTrackingMetricsPaginator(JSONPathPaginator):
-    def get_next(self, response: requests.Response) -> str | None:
-        all_matches = extract_jsonpath(self._jsonpath, response.json())
-        return next(all_matches, None)
-
-
-class CallTrackingMetricsStream(RESTStream):
+class CallTrackingMetricsStream(RESTStream[str]):
     """CallTrackingMetrics stream class."""
 
     url_base = "https://api.calltrackingmetrics.com"
 
+    @override
     @property
     def authenticator(self) -> HTTPBasicAuth:
-        return HTTPBasicAuth(
-            username=self.config.get("access_key", ""),
-            password=self.config.get("secret_key", ""),
-        )
-
-    @property
-    def http_headers(self) -> dict:
-        return {}
+        return HTTPBasicAuth(username=self.config["access_key"], password=self.config["secret_key"])
 
 
 class PaginatedCallTrackingMetricsStream(CallTrackingMetricsStream):
@@ -47,16 +38,9 @@ class PaginatedCallTrackingMetricsStream(CallTrackingMetricsStream):
 
     next_page_token_jsonpath = "$.next_page"  # noqa: S105
 
-    def get_new_paginator(self) -> CallTrackingMetricsPaginator:
-        return CallTrackingMetricsPaginator(self.next_page_token_jsonpath)
-
-    def get_url_params(
-        self,
-        context: Context | None,  # noqa: ARG002
-        next_page_token: t.Any | None,
-    ) -> dict[str, t.Any]:
-        params: dict = {}
-        params["per_page"] = self.PAGE_SIZE
+    @override
+    def get_url_params(self, context: Context | None, next_page_token: str | None) -> dict[str, Any]:
+        params: dict[str, Any] = {"per_page": self.PAGE_SIZE}
         if next_page_token:
             for k, v in parse_qs(urlparse(next_page_token).query).items():
                 params[k] = v[0]

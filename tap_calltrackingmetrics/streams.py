@@ -2,36 +2,48 @@
 
 from __future__ import annotations
 
-import datetime
-import typing as t
-from importlib import resources
+import sys
+from datetime import datetime, timezone
+from typing import TYPE_CHECKING, Any
 
+from singer_sdk import SchemaDirectory, StreamSchema
+
+from tap_calltrackingmetrics import schemas
 from tap_calltrackingmetrics.client import (
     CallTrackingMetricsStream,
     PaginatedCallTrackingMetricsStream,
 )
-from tap_calltrackingmetrics import schemas
 
-if t.TYPE_CHECKING:
-    from singer_sdk.helpers import types
+if sys.version_info >= (3, 12):
+    from typing import override
+else:
+    from typing_extensions import override
+
+if TYPE_CHECKING:
+    from singer_sdk.helpers.types import Context, Record
 
 
-SCHEMAS_DIR = resources.files(schemas)
+SCHEMAS_DIR = SchemaDirectory(schemas)
+
+
+def start_date_from_bookmark(bookmark: str | int | None) -> str | None:
+    if isinstance(bookmark, str):
+        return datetime.fromisoformat(bookmark).strftime("%Y-%m-%d")
+    if isinstance(bookmark, int):
+        return datetime.fromtimestamp(bookmark, tz=timezone.utc).strftime("%Y-%m-%d")
+    return None
 
 
 class AccountStream(PaginatedCallTrackingMetricsStream):
     name = "account"
     path = "/api/v1/accounts"
     records_jsonpath = "$.accounts[*]"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key = None
-    schema_filepath = SCHEMAS_DIR / "account.json"
+    schema = StreamSchema(SCHEMAS_DIR)
 
-    def get_child_context(
-        self,
-        record: types.Record,
-        context: types.Context | None,  # noqa: ARG002
-    ) -> types.Context | None:
+    @override
+    def get_child_context(self, record: Record, context: Context | None) -> Context | None:
         return {
             "_sdc_account_id": record["id"],
         }
@@ -41,9 +53,9 @@ class UserStream(PaginatedCallTrackingMetricsStream):
     name = "user"
     path = "/api/v1/accounts/{_sdc_account_id}/users"
     records_jsonpath = "$.users[*]"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key = None
-    schema_filepath = SCHEMAS_DIR / "user.json"
+    schema = StreamSchema(SCHEMAS_DIR)
     parent_stream_type = AccountStream
 
 
@@ -51,39 +63,21 @@ class CallStream(PaginatedCallTrackingMetricsStream):
     name = "call"
     path = "/api/v1/accounts/{_sdc_account_id}/calls"
     records_jsonpath = "$.calls[*]"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key = "unix_time"
-    schema_filepath = SCHEMAS_DIR / "call.json"
+    schema = StreamSchema(SCHEMAS_DIR)
     parent_stream_type = AccountStream
 
-    def get_url_params(
-        self,
-        context: types.Context | None,
-        next_page_token: t.Any | None,
-    ) -> dict[str, t.Any]:
+    @override
+    def get_url_params(self, context: Context | None, next_page_token: str | None) -> dict[str, Any]:
         params = super().get_url_params(context, next_page_token)
-        starting_replication_key_value = self.get_starting_replication_key_value(
-            context
-        )
-        start_date = None
-        if isinstance(starting_replication_key_value, str):
-            start_date = datetime.datetime.fromisoformat(
-                starting_replication_key_value
-            ).strftime("%Y-%m-%d")
-        elif isinstance(starting_replication_key_value, int):
-            start_date = datetime.datetime.fromtimestamp(
-                starting_replication_key_value,
-                tz=datetime.timezone.utc,
-            ).strftime("%Y-%m-%d")
-        if start_date is not None:
+        value = self.get_starting_replication_key_value(context)
+        if start_date := start_date_from_bookmark(value):
             params["start_date"] = start_date
         return params
 
-    def get_child_context(
-        self,
-        record: types.Record,
-        context: types.Context | None,
-    ) -> types.Context | None:
+    @override
+    def get_child_context(self, record: Record, context: Context | None) -> Context | None:
         assert context, "Context is expected here"  # noqa: S101
         return {
             "_sdc_account_id": context["_sdc_account_id"],
@@ -95,9 +89,9 @@ class SaleStream(CallTrackingMetricsStream):
     name = "sale"
     path = "/api/v1/accounts/{_sdc_account_id}/calls/{_sdc_call_id}/sale"
     records_jsonpath = "$"
-    primary_keys: t.ClassVar[list[str]] = ["_sdc_account_id", "_sdc_call_id"]
+    primary_keys = ("_sdc_account_id", "_sdc_call_id")
     replication_key = None
-    schema_filepath = SCHEMAS_DIR / "sale.json"
+    schema = StreamSchema(SCHEMAS_DIR)
     parent_stream_type = CallStream
 
 
@@ -105,9 +99,9 @@ class TriggerStream(PaginatedCallTrackingMetricsStream):
     name = "trigger"
     path = "/api/v1/accounts/{_sdc_account_id}/triggers"
     records_jsonpath = "$.automators[*]"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key = None
-    schema_filepath = SCHEMAS_DIR / "trigger.json"
+    schema = StreamSchema(SCHEMAS_DIR)
     parent_stream_type = AccountStream
 
 
@@ -118,16 +112,13 @@ class ContactListStream(PaginatedCallTrackingMetricsStream):
     name = "contact_list"
     path = "/api/v1/accounts/{_sdc_account_id}/lists"
     records_jsonpath = "$.contact_lists[*]"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key = None
-    schema_filepath = SCHEMAS_DIR / "contact_list.json"
+    schema = StreamSchema(SCHEMAS_DIR)
     parent_stream_type = AccountStream
 
-    def get_child_context(
-        self,
-        record: types.Record,
-        context: types.Context | None,
-    ) -> types.Context | None:
+    @override
+    def get_child_context(self, record: Record, context: Context | None) -> Context | None:
         assert context, "Context is expected here"  # noqa: S101
         return {
             "_sdc_account_id": context["_sdc_account_id"],
@@ -142,7 +133,7 @@ class ContactListDetailStream(PaginatedCallTrackingMetricsStream):
     name = "contact_list_detail"
     path = "/api/v1/accounts/{_sdc_account_id}/lists/{_sdc_contact_list_id}/contacts"
     records_jsonpath = "$.contacts[*]"
-    primary_keys: t.ClassVar[list[str]] = ["id"]
+    primary_keys = ("id",)
     replication_key = None
-    schema_filepath = SCHEMAS_DIR / "contact_list_detail.json"
+    schema = StreamSchema(SCHEMAS_DIR)
     parent_stream_type = ContactListStream

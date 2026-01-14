@@ -22,6 +22,7 @@ classifiers = [
 dependencies = [
     "singer-sdk[]~=0.53.2",
     "requests~=2.32.3",
+    "typing-extensions~=4.15 ; python_full_version < '3.12'",
 ]
 
 [project.optional-dependencies]
@@ -50,13 +51,22 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.pytest]
-addopts = ["--durations=10"]
+addopts = [
+    "-v",
+    "--durations=10",
+]
+log_level = "INFO"
 minversion = "9"
 
 [tool.mypy]
-python_version = "3.12"
+follow_untyped_imports = true
+warn_redundant_casts = true
+warn_unreachable = true
 warn_unused_configs = true
 warn_unused_ignores = true
+
+[tool.ruff]
+line-length = 120
 
 [tool.ruff.lint]
 ignore = [
@@ -71,6 +81,9 @@ select = ["ALL"]
 
 [tool.ruff.lint.flake8-annotations]
 allow-star-arg-any = true
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["S101"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"

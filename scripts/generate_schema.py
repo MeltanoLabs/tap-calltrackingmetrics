@@ -1,22 +1,27 @@
-import json  # noqa: INP001
+from __future__ import annotations  # noqa: INP001
+
+import json
 import os
 import sys
-import typing
 from decimal import Decimal
+from typing import TYPE_CHECKING, Any
 
 from dotenv import load_dotenv
 from genson import SchemaBuilder
-from singer_sdk import RESTStream
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))  # noqa: PTH100, PTH120
 
 from tap_calltrackingmetrics import streams
 from tap_calltrackingmetrics.tap import TapCallTrackingMetrics
 
+if TYPE_CHECKING:
+    from singer_sdk import RESTStream
+    from singer_sdk.helpers.types import Context
+
 MAX_RECORDS = 1000  # maximum records to sync before generating a schema
 
 
-def make_nullable(schema: dict) -> dict:
+def make_nullable(schema: dict[str, Any]) -> dict[str, Any]:
     """Make all properties in the schema nullable and remove 'required'."""
     if isinstance(schema, dict):
         if "type" in schema:
@@ -39,14 +44,16 @@ def make_nullable(schema: dict) -> dict:
 
 
 def generate_schema(
-    stream_instance: RESTStream, context_list: list[dict], output_file: str
+    stream_instance: RESTStream[Any],
+    context_list: list[Context],
+    output_file: str,
 ) -> None:
     builder = SchemaBuilder()
-    records = []
+    records: list[dict[str, Any]] = []
     for context in context_list:
         records.extend(stream_instance.get_records(context=context))
 
-    def convert_decimal(obj: typing.Any) -> float:
+    def convert_decimal(obj: Any) -> float | dict[str, Any] | list[Any]:
         if isinstance(obj, Decimal):
             return float(obj)
         if isinstance(obj, dict):
@@ -86,20 +93,17 @@ def main() -> None:
     parent = streams.CallStream(tap=tap)
     children = [streams.SaleStream(tap=tap)]
 
-    gen = grandparent.get_records(context=None)
+    gen = iter(grandparent.get_records(context=None))
     first = next(gen, None)
     if not first:
         msg = "no grandparent entries found"
         raise RuntimeError(msg)
     context = grandparent.get_child_context(record=first, context=None)
 
-    gen = parent.get_records(context=context)
-
     context_list = []
-    for parent_record in gen:
-        context_list.append(
-            parent.get_child_context(record=parent_record, context=context)
-        )
+    for parent_record in parent.get_records(context=context):
+        if context := parent.get_child_context(record=parent_record, context=context):
+            context_list.append(context)
         if len(context_list) >= MAX_RECORDS:
             for child in children:
                 generate_schema(
