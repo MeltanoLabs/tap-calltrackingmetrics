@@ -135,8 +135,50 @@
                         "boolean",
                         "null"
                     ]
+                },
+                "digits": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "text": {
+                    "type": [
+                        "string",
+                        "null"
+                    ]
                 }
             }
+        },
+        "recording_access_settings": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "status": {"type": ["boolean", "null"]},
+                "voicemail_only": {"type": ["boolean", "null"]},
+                "password_protected": {"type": ["boolean", "null"]}
+            }
+        },
+        "notifications": {
+            "type": [
+                "object",
+                "null"
+            ],
+            "properties": {
+                "override_team_settings": {"type": ["boolean", "null"]},
+                "email_notify_on_missed_calls": {"type": ["boolean", "null"]},
+                "email_notify_on_message": {"type": ["boolean", "null"]},
+                "email_notify_on_missed_message": {"type": ["boolean", "null"]},
+                "missed_message_threshold": {"type": ["integer", "null"]}
+            }
+        },
+        "use_filter_v2": {
+            "type": [
+                "boolean",
+                "null"
+            ]
         },
         "_sdc_account_id": {
             "type": [
