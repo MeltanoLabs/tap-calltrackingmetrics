@@ -1,13 +1,13 @@
 version: 1
 send_anonymous_usage_stats: true
-project_id: "tap-calltrackingmetrics"
+project_id: tap-calltrackingmetrics
 default_environment: test
 environments:
 - name: test
 plugins:
   extractors:
-  - name: "tap-calltrackingmetrics"
-    namespace: "tap_calltrackingmetrics"
+  - name: tap-calltrackingmetrics
+    namespace: tap_calltrackingmetrics
     pip_url: -e .
     capabilities:
     - state
@@ -15,6 +15,7 @@ plugins:
     - discover
     - about
     - stream-maps
+    - structured-logging
     settings:
     - name: access_key
     - name: secret_key
@@ -25,3 +26,6 @@ plugins:
   - name: target-jsonl
     variant: andyh1203
     pip_url: target-jsonl
+  - name: target-duckdb
+    variant: meltanolabs
+    pip_url: git+https://github.com/MeltanoLabs/target-duckdb.git

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import sys
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from typing import TYPE_CHECKING, Any
 
 from singer_sdk import SchemaDirectory, StreamSchema
@@ -26,12 +26,29 @@ if TYPE_CHECKING:
 SCHEMAS_DIR = SchemaDirectory(schemas)
 
 
-def start_date_from_bookmark(bookmark: str | int | None) -> str | None:
+def is_utc(dt: datetime) -> bool:
+    """Check if a datetime is timezone-aware AND in UTC."""
+    return dt.tzinfo is not None and (offset := dt.tzinfo.utcoffset(dt)) is not None and offset.total_seconds() == 0
+
+
+def start_date_from_bookmark(bookmark: str | float | None) -> str | None:
+    if bookmark is None:
+        return None
+
     if isinstance(bookmark, str):
-        return datetime.fromisoformat(bookmark).strftime("%Y-%m-%d")
-    if isinstance(bookmark, int):
-        return datetime.fromtimestamp(bookmark, tz=timezone.utc).strftime("%Y-%m-%d")
-    return None
+        dt = datetime.fromisoformat(bookmark)
+
+    elif isinstance(bookmark, (int, float)):
+        dt = datetime.fromtimestamp(bookmark, tz=timezone.utc)
+
+    # For UTC hours between 00:00 and 8:59, subtract 9 hours to avoid gaps caused by
+    # the CTM API interpreting start_date as midnight in its local US timezone (up to UTC-8),
+    # while our bookmark is in UTC. Without this buffer, calls in the early UTC hours of the
+    # bookmark date would never be fetched.
+    if is_utc(dt) and dt.hour < 9:  # noqa: PLR2004
+        dt -= timedelta(hours=9)
+
+    return dt.strftime("%Y-%m-%d")
 
 
 class AccountStream(PaginatedCallTrackingMetricsStream):
