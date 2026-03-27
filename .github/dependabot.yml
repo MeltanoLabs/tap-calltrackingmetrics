@@ -22,10 +22,20 @@ updates:
   - package-ecosystem: github-actions
     directory: "/"
     schedule:
-      interval: weekly
+      interval: monthly
     commit-message:
       prefix: "ci: "
     groups:
       actions:
         patterns:
           - "*"
+  - package-ecosystem: pre-commit
+    directory: "/"
+    schedule:
+      interval: monthly
+    groups:
+      hooks:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "chore: "
