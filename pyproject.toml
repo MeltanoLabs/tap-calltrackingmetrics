@@ -34,16 +34,16 @@ tap-calltrackingmetrics = "tap_calltrackingmetrics.tap:TapCallTrackingMetrics.cl
 [dependency-groups]
 dev = [
     "genson~=1.3.0",
-    "ruff~=0.15.12",
+    "ruff~=0.15.13",
 ]
 testing = [
     "pytest>=9",
     "singer-sdk[testing]",
 ]
 typing = [
-    "mypy>=2.0.0",
-    "ty>=0.0.34",
-    "types-requests>=2.33.0.20260503",
+    "mypy>=2.1.0",
+    "ty>=0.0.35",
+    "types-requests>=2.33.0.20260513",
 ]
 
 [build-system]
