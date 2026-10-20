@@ -34,7 +34,7 @@ tap-calltrackingmetrics = "tap_calltrackingmetrics.tap:TapCallTrackingMetrics.cl
 [dependency-groups]
 dev = [
     "genson~=1.4.0",
-    "ruff~=0.16.0",
+    "ruff>=0.16,<0.18",
 ]
 testing = [
     "pytest>=9.1.1",
